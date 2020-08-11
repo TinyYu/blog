@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.mapper.TagMapper">
+
+    <select id="getTagById" parameterType="int" resultType="tag">
+        select tagId as id,name from b_tag where tagId = #{id};
+    </select>
+
+    <select id="getListTag" resultType="tag">
+        select tagId as id,name from b_tag
+    </select>
+
+    <select id="getListTagByCount" resultType="tag" parameterType="int">
+        select tagId as id,name from b_tag limit 0,#{count}
+    </select>
+
+    <select id="getTagByName" resultType="tag" parameterType="String">
+        select tagId as id,name from b_tag where name = #{name};
+    </select>
+    <insert id="addTog" parameterType="tag" useGeneratedKeys="true" keyProperty="id">
+        insert into b_tag (name) values (#{name});
+    </insert>
+
+    <update id="updateTog" parameterType="tag" useGeneratedKeys="true" keyProperty="id">
+        update b_tag set name = #{name} where tagId = #{id};
+    </update>
+
+    <delete id="deleteTog" parameterType="int">
+        delete from b_tag where tagId = #{id};
+    </delete>
+
+</mapper>

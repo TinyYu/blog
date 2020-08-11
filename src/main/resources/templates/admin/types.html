@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<!-- 移动端的预览设置 -->
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>分类管理</title>
+	<!-- Semantic UI css-->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+	<!-- 自定义css样式 -->
+	<link rel="stylesheet" type="text/css" href="../../static/css/me.css" th:href="@{/css/me.css}">
+</head>
+<body>
+
+<!-- 导航菜单 -->
+<nav class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+
+	<div class="ui container">
+		<div class="ui inverted secondary stackable menu">
+
+			<h2 class="ui teal header item">管理后台</h2>
+			<a href="#" th:href="@{/admin/blogs}" class="m-item item m-mobile-hide"><i class="home icon"></i>博客</a>
+			<a href="#" th:href="@{/admin/types}" class="active m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+			<a href="#" th:href="@{/admin/tags}" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+
+			<div class="right m-item m-mobile-hide menu">
+				<div class="ui dropdown item">
+					<div class="text">
+						<img class="ui avatar image"  th:src="${session.user.getAvatar()}" style="width: 3em;height: 3em">
+						<span th:text="${session.user.getNickname()}"></span>
+					</div>
+					<i class="dropdown icon"></i>
+					<div class="menu">
+						<a th:href="@{/admin/loginOut}" class="item">注销</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<a href="#" class="ui black icon button m-top-right m-mobile-show" id="toggle">
+		<i class="sidebar icon"></i>
+	</a>
+</nav>
+
+<!-- 二级导航 -->
+<div class="ui attached pointing menu">
+	<div class="ui container">
+		<div class="right menu">
+			<a href="#" th:href="@{/admin/types/input}" class="teal item">添加</a>
+			<a href="#" th:href="@{/admin/types}" class="active item">列表</a>
+		</div>
+	</div>
+</div>
+
+<!-- 中间内容部分 -->
+<div class="m-padded-tb-big m-container-small">
+	<div class="ui container">
+		<div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+			<i class="close icon"></i>
+			<div class="header">提示: </div>
+			<p th:text="${message}"></p>
+		</div>
+		<table class="ui table">
+			<thead>
+				<tr>
+					<th></th>
+					<th>名称</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="type,iterStat : ${listType}">
+					<td th:text="${iterStat.count}"></td>
+					<td th:text="${type.getName()}"></td>
+					<td>
+						<a th:href="@{/admin/types/{id}/input(id=${type.getId()})}" class="ui mini teal button">编辑</a>
+						<a th:href="@{/admin/types/{id}/delete(id=${type.getId()})}" class="ui mini red button">删除</a>
+					</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="6">
+						<div class="ui pagination menu">
+
+							<!-- pageInfo.hasPreviousPage : 是否有前一页
+							 	 pageInfo.prePage : 前一页
+							 	 pageInfo.pages : 总页数
+							 	 pageInfo.pageNum : 当前页-->
+							<span th:if="${pageInfo.pageNum!=1}"><a th:href="@{/admin/types/(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:${pageInfo.pages})}" class="icon item">
+								上一页
+							</a></span>
+
+							<!-- pageInfo.hasNextPage : 是否有下一页
+							 	 pageInfo.nextPage : 下一页
+							 	 pageInfo.pages : 总页数
+							 	 pageInfo.pageNum : 当前页-->
+							<span th:if="${pageInfo.pageNum != pageInfo.pages}"><a th:href="@{/admin/types/(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}" class="icon item">
+								下一页
+							</a></span>
+
+						</div>
+						<a th:href="@{/admin/types/input}" class="ui mini right floated teal basic button">新增</a>
+					</th>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+<!-- jquery -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<!-- Semantic UI js-->
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script type="text/javascript">
+	// 显示和隐藏导航栏选项
+	$('#toggle').click(function() {
+		$('.m-item').toggleClass('m-mobile-hide');
+	});
+
+	$('.ui.dropdown').dropdown({
+		on:'hover'
+	});
+
+	// 消息提示关闭初始化
+	$('.message .close')
+		.on('click',function () {
+			$(this)
+				.closest('.message')
+				.transition('fade');
+	});
+</script>
+
+</body>
+</html>

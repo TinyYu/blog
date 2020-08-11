@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.mapper.BlogUserMapper">
+    <select id="getBlogUserById" parameterType="int" resultType="blogUser">
+        select * from b_user where userId = #{id}
+    </select>
+
+    <select id="getBlogUserByName" resultType="blogUser" parameterType="String">
+        select * from b_user where username = #{name}
+    </select>
+</mapper>

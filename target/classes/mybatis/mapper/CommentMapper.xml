@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.mapper.CommentMapper">
+
+    <select id="getCommentById" parameterType="int" resultType="comment">
+        select * from b_comment as a,b_comment as b where commentId = #{id};
+    </select>
+
+    <select id="getCommentListByBlogId" parameterType="int" resultType="comment">
+        select * from b_comment as a where blogId = #{blogId} and parentCommentId is null order by createTime desc
+    </select>
+
+<!--    <select id="getCommentListByBlogId" parameterType="int" resultType="comment">-->
+<!--        select * from b_comment where blogId = #{blogId} order by createTime desc-->
+<!--    </select>-->
+
+    <select id="getCommentByParentCommentId" parameterType="int" resultType="comment">
+        select * from b_comment where parentCommentId = #{parentCommentId} order by createTime desc
+    </select>
+
+    <insert id="addComment" parameterType="comment" useGeneratedKeys="true" keyProperty="commentId">
+        insert into b_comment (nickname, email, content, avatar, createTime, blogId, parentCommentId) values  (#{nickname}, #{email}, #{content}, #{avatar}, #{createTime}, #{blogId}, #{parentCommentId})
+    </insert>
+
+</mapper>

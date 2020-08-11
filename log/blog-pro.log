@@ -1,0 +1,20 @@
+2020-08-07 14:38:35.231  INFO 11544 --- [restartedMain] com.ly.BlogIdeaApplication               : Starting BlogIdeaApplication on DESKTOP-5GCKE9K with PID 11544 (F:\exploit\Trchnology\blog_idea\target\classes started by 22978 in F:\exploit\Trchnology\blog_idea)
+2020-08-07 14:38:35.233  INFO 11544 --- [restartedMain] com.ly.BlogIdeaApplication               : The following profiles are active: dev
+2020-08-07 14:38:35.743  WARN 11544 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.ly]' package. Please check your configuration.
+2020-08-07 14:38:36.320  WARN 11544 --- [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2020-08-07 14:38:36.487  INFO 11544 --- [restartedMain] com.ly.BlogIdeaApplication               : Started BlogIdeaApplication in 1.557 seconds (JVM running for 2.084)
+2020-08-07 14:41:35.970  INFO 13884 --- [restartedMain] com.ly.BlogIdeaApplication               : Starting BlogIdeaApplication on DESKTOP-5GCKE9K with PID 13884 (F:\exploit\Trchnology\blog_idea\target\classes started by 22978 in F:\exploit\Trchnology\blog_idea)
+2020-08-07 14:41:35.972  INFO 13884 --- [restartedMain] com.ly.BlogIdeaApplication               : The following profiles are active: pro
+2020-08-07 14:41:36.432  WARN 13884 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.ly]' package. Please check your configuration.
+2020-08-07 14:41:36.997  WARN 13884 --- [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2020-08-07 14:41:37.165  INFO 13884 --- [restartedMain] com.ly.BlogIdeaApplication               : Started BlogIdeaApplication in 1.468 seconds (JVM running for 1.97)
+2020-08-07 14:42:48.470  INFO 13116 --- [restartedMain] com.ly.BlogIdeaApplication               : Starting BlogIdeaApplication on DESKTOP-5GCKE9K with PID 13116 (F:\exploit\Trchnology\blog_idea\target\classes started by 22978 in F:\exploit\Trchnology\blog_idea)
+2020-08-07 14:42:48.472  INFO 13116 --- [restartedMain] com.ly.BlogIdeaApplication               : The following profiles are active: pro
+2020-08-07 14:42:48.940  WARN 13116 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.ly]' package. Please check your configuration.
+2020-08-07 14:42:49.546  WARN 13116 --- [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2020-08-07 14:42:49.732  INFO 13116 --- [restartedMain] com.ly.BlogIdeaApplication               : Started BlogIdeaApplication in 1.543 seconds (JVM running for 2.043)
+2020-08-07 14:43:23.337  INFO 14264 --- [restartedMain] com.ly.BlogIdeaApplication               : Starting BlogIdeaApplication on DESKTOP-5GCKE9K with PID 14264 (F:\exploit\Trchnology\blog_idea\target\classes started by 22978 in F:\exploit\Trchnology\blog_idea)
+2020-08-07 14:43:23.340  INFO 14264 --- [restartedMain] com.ly.BlogIdeaApplication               : The following profiles are active: pro
+2020-08-07 14:43:23.828  WARN 14264 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.ly]' package. Please check your configuration.
+2020-08-07 14:43:24.408  WARN 14264 --- [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2020-08-07 14:43:24.590  INFO 14264 --- [restartedMain] com.ly.BlogIdeaApplication               : Started BlogIdeaApplication in 1.545 seconds (JVM running for 2.065)

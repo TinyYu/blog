@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.mapper.BlogMapper">
+
+    <resultMap id="blogMap" type="blog">
+        <id property="blogId" column="blogId"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="firstPicture" column="firstPicture"/>
+        <result property="flag" column="flag"/>
+        <result property="views" column="views"/>
+        <result property="appreciation" column="appreciation"/>
+        <result property="shareStatement" column="shareStatement"/>
+        <result property="comment" column="comment"/>
+        <result property="published" column="published"/>
+        <result property="recommend" column="recommend"/>
+        <result property="createTime" column="createTime"/>
+        <result property="updateTime" column="updateTime"/>
+        <result property="typeId" column="typeId"/>
+        <result property="userId" column="userId"/>
+        <result property="blogdescribe" column="blogdescribe"/>
+        <association property="types" javaType="type">
+            <result property="name" column="typeName"/>
+        </association>
+        <association property="user" javaType="BlogUser">
+            <result property="userId" column="userId"/>
+            <result property="nickname" column="nickname"/>
+        </association>
+        <collection property="tags" ofType="tag">
+            <result property="id" column="tagId"/>
+            <result property="name" column="tagName"/>
+        </collection>
+    </resultMap>
+
+    <sql id="select_blog">
+        select b.*,t.name as typeName,tag.tagId as tagId,tag.name as tagName,us.userId as userId,us.nickname as nickname
+        from b_blog as b
+        left join b_type as t
+        on b.typeId = t.typeId
+        left join b_idt as idt
+        on b.blogId = idt.blogId
+        left join b_tag as tag
+        on tag.tagId = idt.tagId
+        left join b_user us
+        on us.userId = b.userId
+    </sql>
+
+    <select id="getListBlog" resultMap="blogMap">
+        <include refid="select_blog"/>
+    </select>
+
+    <select id="getListBlogNewest" resultMap="blogMap">
+        <include refid="select_blog"/>where b.recommend = true order by b.updateTime desc limit 0,#{count}
+    </select>
+
+    <select id="getBlogById" parameterType="int" resultMap="blogMap">
+        <include refid="select_blog"/> where b.blogId = #{id}
+    </select>
+
+    <select id="getBlogByTitle" parameterType="String" resultType="blog">
+        select * from b_blog where title = #{title}
+    </select>
+
+    <select id="getBlogByTypeId" parameterType="int" resultMap="blogMap">
+        <include refid="select_blog"/> where b.typeId = #{typeId}
+    </select>
+
+    <!-- 条件查询 -->
+    <sql id="if-title-author">
+        <if test="title != null">
+            and title like #{title}
+        </if>
+        <if test="typeId != null">
+            and b.typeId = #{typeId}
+        </if>
+        <if test="recommend != null">
+            and recommend = #{recommend}
+        </if>
+        <if test="content != null">
+            or content like #{content}
+        </if>
+    </sql>
+    <select id="getBlogByQBC" parameterType="map" resultMap="blogMap">
+        <include refid="select_blog"/>
+        <where>
+            <include refid="if-title-author"/>
+        </where>
+    </select>
+
+    <select id="getBlogByTagId" parameterType="int" resultMap="blogMap">
+        <include refid="select_blog"/> WHERE idt.tagId = #{tagId}
+    </select>
+
+
+    <select id="getBlogYear" resultType="String">
+        SELECT DATE_FORMAT(updateTime,'%Y') as year FROM b_blog GROUP BY year ORDER BY year DESC
+    </select>
+
+    <select id="getBlogByYear" parameterType="String" resultMap="blogMap">
+        <include refid="select_blog"/> where DATE_FORMAT(b.updateTime,'%Y') = #{year}
+    </select>
+
+    <insert id="addBlog" parameterType="blog" useGeneratedKeys="true" keyProperty="blogId">
+        insert into b_blog(title, content, firstPicture, flag, views, appreciation, shareStatement, comment, published, recommend, createTime, updateTime, typeId, userId, blogdescribe) values (#{title}, #{content}, #{firstPicture}, #{flag}, #{views}, #{appreciation}, #{shareStatement}, #{comment}, #{published}, #{recommend}, #{createTime}, #{updateTime}, #{typeId}, #{userId}, #{blogdescribe})
+    </insert>
+
+    <update id="updateBlog" parameterType="blog" useGeneratedKeys="true" keyProperty="blogId">
+        update b_blog set title = #{title},content = #{content},firstPicture = #{firstPicture},flag = #{flag},views = #{views},appreciation=#{appreciation},shareStatement=#{shareStatement},comment = #{comment},published = #{published},recommend = #{recommend},updateTime = #{updateTime},blogdescribe=#{blogdescribe} where  blogId = #{blogId}
+    </update>
+
+    <delete id="deleteBlog" parameterType="int">
+        delete from b_blog where blogId = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.mapper.TypeMapper">
+
+    <resultMap id="typeMap" type="type">
+        <id property="id" column="typeId"/>
+        <result property="name" column="typeName"/>
+        <collection property="blogs" ofType="blog">
+            <id property="blogId" column="blogId"/>
+            <result property="title" column="title"/>
+            <result property="content" column="content"/>
+            <result property="firstPicture" column="firstPicture"/>
+            <result property="flag" column="flag"/>
+            <result property="views" column="views"/>
+            <result property="appreciation" column="appreciation"/>
+            <result property="shareStatement" column="shareStatement"/>
+            <result property="comment" column="comment"/>
+            <result property="published" column="published"/>
+            <result property="recommend" column="recommend"/>
+            <result property="createTime" column="createTime"/>
+            <result property="updateTime" column="updateTime"/>
+            <result property="typeId" column="typeId"/>
+            <result property="userId" column="userId"/>
+            <result property="blogdescribe" column="blogdescribe"/>
+        </collection>
+    </resultMap>
+
+    <sql id="select_type">
+        select ty.typeId as typeId,ty.name as typeName,b.*
+        from b_type as ty
+        left join b_blog as b
+        on ty.typeId = b.typeId
+    </sql>
+
+    <select id="getListType"  resultMap="typeMap">
+        <include refid="select_type"/>
+    </select>
+
+    <select id="getListTypeByCount" resultType="type" parameterType="int">
+        select typeId as id,name  from b_type limit 0,#{count}
+    </select>
+
+    <select id="getTypeById" parameterType="int" resultType="type">
+        select typeId as id,name from b_type where typeId = #{id};
+    </select>
+
+    <select id="getTypeByName" parameterType="String" resultType="type">
+        select typeId as id,name from b_type where name = #{name};
+    </select>
+
+    <select id="getTypeByBlogId" resultMap="typeMap">
+        select ty.typeId as typeId,ty.name as typeName,b.*
+        from b_type as ty
+        left join b_blog as b
+        on ty.typeId = b.typeId
+        group by ty.typeId
+    </select>
+
+    <insert id="addType" parameterType="type" useGeneratedKeys="true" keyProperty="id">
+        insert into b_type(name) values (#{name});
+    </insert>
+
+    <update id="updateType" parameterType="type" useGeneratedKeys="true" keyProperty="id">
+        update b_type set name = #{name} where typeId = #{id}
+    </update>
+
+    <delete id="deleteType" parameterType="int">
+        delete from b_type where typeId = #{id}
+    </delete>
+</mapper>

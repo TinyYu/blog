@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- font files -->
+    <link href="http://fonts.googleapis.com/css?family=Wallpoet" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Hind" rel="stylesheet">
+    <!-- /font files -->
+    <!-- css files -->
+    <link href="../../static/css/style_error.css" th:href="@{/css/style_error.css}" rel="stylesheet" type="text/css" media="all"/>
+    <!-- /css files -->
+<body>
+<div class="w3layouts-bg">
+    <div class="agileits-content">
+        <h2><span>难</span><span>受</span><span>!</span></h2>
+    </div>
+    <div class="w3layouts-right">
+        <div class="w3ls-text">
+            <h3>很抱歉!</h3>
+            <h4 class="w3-agileits2">系统错误。</h4>
+            <a th:href="@{/}">返回首页</a>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+<div>
+    <div th:utext="'&lt;!--'" th:remove="tag"></div>
+    <div th:utext="'Failed Request URL : ' + ${url}" th:remove="tag"></div>
+    <div th:utext="'Exception message : ' + ${exception.message}" th:remove="tag"></div>
+    <ul th:remove="tag">
+        <li th:each="st: ${exception.stackTrace}" th:remove="tag">
+            <span th:utext="${st}" th:remove="tag"></span>
+        </li>
+    </ul>
+    <div th:utext="'--&gt;'" th:remove="tag"></div>
+</div>
+</body>
+</html>

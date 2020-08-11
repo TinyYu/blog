@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.mapper.IdtMapper">
+    <select id="getIdt" resultType="idt">
+        select * from b_idt
+    </select>
+
+    <select id="" resultType="int" parameterType="int">
+        select count(blogId) from b_idt where tagId = 2
+    </select>
+    <select id="getIdtByBlogId" parameterType="int" resultType="idt">
+        select * from b_idt where blogId = #{blogId}
+    </select>
+
+    <select id="getIdtByTagId" parameterType="int" resultType="idt">
+        select * from b_idt where tagId = #{tagId}
+    </select>
+
+    <insert id="addIdt" parameterType="idt" useGeneratedKeys="true" keyProperty="blogId">
+        insert into b_idt (blogId, tagId) values (#{blogId},#{tagId})
+    </insert>
+
+    <delete id="deleteIdt" parameterType="int">
+        delete from b_idt where blogId = #{blogId};
+    </delete>
+</mapper>
